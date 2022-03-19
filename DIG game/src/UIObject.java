@@ -1,0 +1,6 @@
+
+
+//james
+public class UIObject {
+
+}

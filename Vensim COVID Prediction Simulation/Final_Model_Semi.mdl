@@ -1,0 +1,290 @@
+{UTF-8}
+Infected Proportion to Vaccinated=
+	(Infected Population/(Vaccinated Population+Infected Population))
+	~	
+	~		|
+
+Vaccinated=
+	Unvaccinated Population*Vaccination Rate
+	~	
+	~		|
+
+Healthy Population=
+	Unvaccinated Population+Vaccinated Population
+	~	
+	~		|
+
+Infect Rate=
+	0.038/2
+	~	
+	~		|
+
+Infected Population= INTEG (
+	Unvaccinated Infected+Vaccinated Infected-Died from Virus-Recovered,
+		3.42515e+06)
+	~	
+	~		|
+
+Infected Proportion to Unvaccinated=
+	(Infected Population/(Unvaccinated Population+Infected Population))
+	~	
+	~		|
+
+Unvaccinated Infection Rate=
+	Infected Proportion to Unvaccinated*Infect Rate
+	~	
+	~		|
+
+Unvaccinated Population= INTEG (
+	-Unvaccinated Infected-Vaccinated,
+		3.21632e+08)
+	~	
+	~		|
+
+Mortality Rate=
+	0.00036*(12/Month)
+	~	
+	~		|
+
+Recovered=
+	Infected Population*Recovery Rate
+	~	
+	~		|
+
+Recovered Population= INTEG (
+	Recovered,
+		6.39121e+06)
+	~	
+	~		|
+
+Vaccination Rate=
+	0.002
+	~	
+	~		|
+
+Total Cases Per Day=
+	Unvaccinated Infected+Vaccinated Infected
+	~	
+	~		|
+
+Vaccinated Infection Rate=
+	Infected Proportion to Vaccinated*(1-Vaccine)*Infect Rate
+	~	
+	~	Infected percent of healthy pop per day
+	|
+
+Unvaccinated Infected=
+	Unvaccinated Population * Unvaccinated Infection Rate
+	~	
+	~		|
+
+Vaccinated Infected=
+	Vaccinated Infection Rate*Vaccinated Population
+	~	
+	~		|
+
+Vaccinated Population= INTEG (
+	Vaccinated-Vaccinated Infected,
+		0)
+	~	
+	~		|
+
+Vaccine=
+	IF THEN ELSE(Strands Covered/Strands>1, Effectiveness , (Strands Covered/Strands)*Effectiveness\
+		 )
+	~	
+	~		|
+
+Timeflow=
+	1
+	~	
+	~		|
+
+Effectiveness=
+	0.9
+	~	
+	~		|
+
+Strands Covered=
+	6 + INTEGER((Month-12)/6)*3
+	~	
+	~		|
+
+Month= INTEG (
+	Timeflow/30,
+		12)
+	~	
+	~		|
+
+Strands=
+	INTEGER(Month/2)
+	~	
+	~		|
+
+Died from Virus=
+	Mortality Rate*Infected Population
+	~	
+	~		|
+
+Recovery Rate=
+	0.0144542
+	~	
+	~	Percent of Infected recovered
+	|
+
+Total Deaths= INTEG (
+	Died from Virus,
+		242226)
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 730
+	~	Day
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Day
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP 
+	~	Day [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Day [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,80,0
+10,1,Infected Population,653,516,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,2,3,1,100,0,0,22,0,0,0,-1--1--1,,1|(734,507)|
+11,3,464,782,507,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,4,Died from Virus,782,526,57,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Vaccinated Infection Rate,771,151,51,51,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,15,Recovery Rate,867,405,43,43,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,16,Mortality Rate,1014,593,42,42,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,17,16,4,0,0,0,0,0,64,0,-1--1--1,,1|(903,561)|
+1,20,1,4,1,0,0,0,0,64,0,-1--1--1,,1|(729,565)|
+12,22,22875874,1258,188,150,150,3,44,0,0,2,0,0,0,0,0,0,0,0,0
+Infected Population,Graph
+12,23,11603272,1259,494,150,150,3,44,0,0,2,0,0,0,0,0,0,0,0,0
+Vaccinated Population,Graph
+10,25,Total Deaths,952,510,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,26,3,25,4,0,0,22,0,0,0,-1--1--1,,1|(850,507)|
+12,27,58919654,1566,191,150,150,3,44,0,0,2,0,0,0,0,0,0,0,0,0
+Total Deaths,Graph
+12,32,12127254,1565,497,150,150,3,44,0,0,2,0,0,0,0,0,0,0,0,0
+Total Cases Per Day,Graph
+10,33,Vaccine,415,87,34,34,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,36,Infect Rate,377,418,38,38,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,37,36,14,0,0,0,0,0,64,0,-1--1--1,,1|(562,291)|
+10,39,Month,205,155,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,40,48,25,151,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,41,43,39,4,0,0,22,0,0,0,-1--1--1,,1|(138,150)|
+1,42,43,40,100,0,0,22,0,0,0,-1--1--1,,1|(67,150)|
+11,43,48,105,150,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,44,Timeflow,105,169,30,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,45,Strands,296,128,27,27,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,46,39,45,0,0,0,0,0,64,0,-1--1--1,,1|(250,141)|
+1,47,45,33,0,0,0,0,0,64,0,-1--1--1,,1|(344,111)|
+10,48,Strands Covered,188,233,39,39,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,49,Effectiveness,410,216,51,51,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,50,48,33,0,0,0,0,0,64,0,-1--1--1,,1|(297,162)|
+1,51,49,33,1,0,0,0,0,64,0,-1--1--1,,1|(423,138)|
+12,52,40111138,1872,190,150,150,3,44,0,0,2,0,0,0,0,0,0,0,0,0
+Strands,Graph
+12,53,52301926,1870,492,150,150,3,44,0,0,2,0,0,0,0,0,0,0,0,0
+Vaccine,Graph
+1,54,39,48,0,0,0,0,0,64,0,-1--1--1,,1|(200,177)|
+10,70,Unvaccinated Population,92,771,47,30,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,71,Vaccinated Population,692,794,44,33,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,73,75,71,4,0,0,22,0,0,0,-1--1--1,,1|(556,780)|
+1,74,75,70,100,0,0,22,0,0,0,-1--1--1,,1|(296,780)|
+11,75,0,459,780,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,76,Vaccinated,459,799,36,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,78,80,1,4,0,0,22,0,0,0,-1--1--1,,1|(429,505)|
+1,79,80,70,100,0,0,22,0,0,0,-1--1--1,,1|(239,771)|
+11,80,0,239,505,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,81,Unvaccinated Infected,239,532,44,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,83,85,1,4,0,0,22,0,0,0,-1--1--1,,1|(671,587)|
+1,84,85,71,100,0,0,22,0,0,0,-1--1--1,,1|(671,708)|
+11,85,0,671,647,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,86,Vaccinated Infected,671,674,36,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,87,14,85,1,0,0,0,0,64,0,-1--1--1,,1|(904,478)|
+1,88,33,14,1,0,0,0,0,64,0,-1--1--1,,1|(595,99)|
+10,89,Healthy Population,362,941,47,47,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,90,70,89,0,0,0,0,0,64,0,-1--1--1,,1|(224,853)|
+1,91,71,89,0,0,0,0,0,64,0,-1--1--1,,1|(532,864)|
+1,94,70,80,1,0,0,0,0,64,0,-1--1--1,,1|(242,676)|
+10,95,Infected Proportion to Unvaccinated,-5,420,62,62,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,96,1,95,1,0,0,0,0,64,0,-1--1--1,,1|(403,300)|
+10,99,Unvaccinated Infection Rate,191,390,59,59,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,100,95,99,0,0,0,0,0,64,0,-1--1--1,,1|(87,405)|
+1,102,99,80,1,0,0,0,0,64,0,-1--1--1,,1|(216,481)|
+1,103,36,99,0,0,0,0,0,64,0,-1--1--1,,1|(301,406)|
+1,104,71,85,1,0,0,0,0,64,0,-1--1--1,,1|(605,681)|
+10,105,Recovered Population,873,295,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,107,109,105,4,0,0,22,0,0,0,-1--1--1,,1|(699,295)|
+1,108,109,1,100,0,0,22,0,0,0,-1--1--1,,1|(699,516)|
+11,109,0,699,317,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,110,Recovered,699,336,35,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,111,15,109,0,0,0,0,0,64,0,-1--1--1,,1|(772,355)|
+1,113,1,109,1,0,0,0,0,64,0,-1--1--1,,1|(662,424)|
+10,114,Vaccination Rate,482,708,51,51,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,115,114,75,0,0,0,0,0,64,0,-1--1--1,,1|(466,758)|
+1,116,70,75,1,0,0,0,0,64,0,-1--1--1,,1|(359,828)|
+10,117,Total Cases Per Day,409,613,40,40,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,118,80,117,0,0,0,0,0,64,0,-1--1--1,,1|(303,545)|
+1,119,85,117,0,0,0,0,0,64,0,-1--1--1,,1|(563,633)|
+1,120,70,95,1,0,0,0,0,64,0,-1--1--1,,1|(-93,663)|
+10,121,Infected Proportion to Vaccinated,1002,761,62,62,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,122,71,121,1,0,0,0,0,64,0,-1--1--1,,1|(848,805)|
+1,123,1,121,0,0,0,0,0,64,0,-1--1--1,,1|(810,626)|
+1,124,121,14,1,0,0,0,0,64,0,-1--1--1,,1|(1068,390)|
+1,125,39,16,1,0,0,0,0,64,0,-1--1--1,,1|(814,98)|
+///---\\\
+:L<%^E!@
+1:Mortality Test A
+1:Mortality Test
+9:Mortality Test A
+23:0
+15:0,0,0,0,0,0
+19:80,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+4:Time
+5:Infect Rate
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:4
+41:0
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+24:0
+25:1021
+26:1021
+75:
+43:

@@ -1,0 +1,198 @@
+{UTF-8}
+Month= INTEG (
+	Timeflow/30,
+		0)
+	~	
+	~		|
+
+Month of Year=
+	INTEGER(MODULO(Month,12))
+	~	
+	~		|
+
+Infected Population  = A FUNCTION OF( -Deaths Related To Virus,Infected,-Recovered) ~~|
+Infected Population= INTEG (
+	Infected+Infected Immigrants-Deaths Related To Virus-Infected Emmigrants-Recovered,
+		0)
+	~	
+	~		|
+
+Healthy Population  = A FUNCTION OF( Births,-Deaths,-Infected,Recovered) ~~|
+Healthy Population= INTEG (
+	Births+Healthy Immigrants+Recovered-Deaths-Healthy Emmigrants-Infected,
+		3.31003e+08)
+	~	
+	~		|
+
+Timeflow=
+	1
+	~	
+	~		|
+
+Age Mortality Distribution  = A FUNCTION OF( )
+	~	
+	~		|
+
+Births=
+	3.31003e+08/365
+	~	
+	~		|
+
+Deaths=
+	7779
+	~	
+	~		|
+
+Deaths Related To Virus=
+	Infected Population * Mortality Rate
+	~	
+	~		|
+
+Infected=
+	Healthy Population * Infection Rate
+	~	
+	~		|
+
+Infection Rate  = A FUNCTION OF( Infected Population,Percent of People Wearing Masks)
+	~	
+	~		|
+
+Mortality Rate  = A FUNCTION OF( Age Mortality Distribution,Racial Mortality Distribution\
+		) ~~|
+Mortality Rate=
+	0.00064
+	~	
+	~		|
+
+Percent of People Wearing Masks  = A FUNCTION OF( )
+	~	
+	~		|
+
+Racial Mortality Distribution=A FUNCTION OF(Racial Mortality Distribution) ~~|
+Racial Mortality Distribution=
+	~	
+	~		|
+
+Recovered  = A FUNCTION OF( )
+	~	
+	~		|
+
+Total Population=
+	Healthy Population + Infected Population
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 100
+	~	Day
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Day
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Day [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Day [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Healthy Population,579,404,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Infected Population,865,401,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,3,5,2,4,0,0,22,0,0,0,-1--1--1,,1|(776,402)|
+1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(667,402)|
+11,5,288,722,402,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Infected,722,421,27,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,7,9,1,4,0,0,22,0,0,0,-1--1--1,,1|(579,246)|
+1,8,9,2,100,0,0,22,0,0,0,-1--1--1,,1|(865,246)|
+11,9,442,742,246,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,10,Recovered,742,265,35,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,11,48,1104,425,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,12,14,11,4,0,0,22,0,0,0,-1--1--1,,1|(1038,423)|
+1,13,14,2,100,0,0,22,0,0,0,-1--1--1,,1|(977,401)|
+11,14,48,977,423,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,15,Deaths Related To Virus,977,460,35,29,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,16,Total Population,726,323,46,46,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,17,1,16,0,0,0,0,0,64,0,-1--1--1,,1|(643,367)|
+1,18,2,16,0,0,0,0,0,64,0,-1--1--1,,1|(804,366)|
+10,19,Percent of People Wearing Masks,651,535,51,51,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,20,Infection Rate,796,462,38,38,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,21,19,20,1,0,0,0,0,64,0,-1--1--1,,1|(741,514)|
+1,22,2,20,1,0,0,0,0,64,0,-1--1--1,,1|(844,429)|
+1,23,20,5,1,0,0,0,0,64,0,-1--1--1,,1|(744,435)|
+10,24,Mortality Rate,1091,490,40,40,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,25,24,14,1,0,0,0,0,64,0,-1--1--1,,1|(1023,445)|
+1,26,2,14,1,0,0,0,0,64,0,-1--1--1,,1|(903,429)|
+1,27,1,5,1,0,0,0,0,64,0,-1--1--1,,1|(654,466)|
+10,28,Racial Mortality Distribution,1011,670,52,52,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,29,Age Mortality Distribution,1180,669,55,55,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,30,28,24,0,0,0,0,0,64,0,-1--1--1,,1|(1050,580)|
+1,31,29,24,0,0,0,0,0,64,0,-1--1--1,,1|(1135,578)|
+12,32,48,320,409,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,33,35,1,4,0,0,22,0,0,0,-1--1--1,,1|(489,409)|
+1,34,35,32,100,0,0,22,0,0,0,-1--1--1,,1|(379,409)|
+11,35,48,434,409,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,36,Births,434,428,20,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,58,48,419,495,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,59,61,58,4,0,0,22,0,0,0,-1--1--1,,1|(515,495)|
+1,60,61,1,100,0,0,22,0,0,0,-1--1--1,,1|(579,575)|
+11,61,48,515,575,8,6,33,3,0,0,4,0,0,0,0,0,0,0,0,0
+10,62,Deaths,546,575,23,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,68,Month,241,288,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,69,48,77,282,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,70,72,68,4,0,0,22,0,0,0,-1--1--1,,1|(182,283)|
+1,71,72,69,100,0,0,22,0,0,0,-1--1--1,,1|(119,283)|
+11,72,48,157,283,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,73,Timeflow,157,302,30,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,74,Month of Year,349,288,32,32,2,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,75,68,74,0,0,0,0,0,64,0,-1--1--1,,1|(292,288)|
+12,83,48,865,630,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,84,0,865,521,8,6,1,3,0,0,1,0,0,0,0,0,0,0,0,0
+1,85,84,2,4,0,0,22,0,0,0,-1--1--1,,1|(865,468)|
+1,86,84,83,100,0,0,22,0,0,0,-1--1--1,,1|(865,574)|
+///---\\\
+:L<%^E!@
+9:Current
+23:0
+15:0,0,0,0,0,0
+19:100,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+5:Month of Year
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:4
+41:0
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+24:0
+25:0
+26:0
+75:
+43:
