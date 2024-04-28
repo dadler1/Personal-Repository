@@ -1,6 +1,0 @@
-
-
-//james
-public class UIObject {
-
-}
